@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<WorkGen>
+	<!--Connection to main database for ancillary file information-->
+        <ancil_db_name>cpdnexpt</ancil_db_name>
+        <ancil_db_user>anciluser</ancil_db_user>
+        <ancil_db_host>sirius.oerc.ox.ac.uk</ancil_db_host>
+        <!--Database to use-->
+        <dbexpt>cpdnexpt_dev</dbexpt>
+        <!--App configuration setting wah1, wah2 and region along with dyn/triffid templates-->
+        <app_config>config_dir/config_wah2.2_eas50.xml</app_config>
+        <!--Upload information-->
+        <upload_handler>http://vorvadoss.oerc.ox.ac.uk/cpdnboinc_dev_cgi/file_upload_handler</upload_handler>
+        <result_template_prefix>upload_templates/dev2.2/result_template_dev</result_template_prefix>
+        <!--Download information for participants to get workunits-->
+        <download_url_base>http://vorvadoss.oerc.ox.ac.uk/cpdnboinc_dev/download</download_url_base>
+        <download_dir_base>/storage/boinc/projects/cpdnboinc_dev/download</download_dir_base>
+        <project_dir>/var/www/boinc/projects/cpdnboinc_dev</project_dir>
+        <namelist_dir>namelist_template_files/wah2.1</namelist_dir>
+        <!--Stash to use in the simulations-->
+        <global_stashc>xaakm.eu.stashc.clim2.global</global_stashc>
+        <region_stashc>xaakg.eu.stashc.clim.region</region_stashc>
+        <!--Batch information (to be updated for each batch)-->
+        <batch_name>New xml test</batch_name>
+        <batch_desc>Testing new xml generation</batch_desc>
+        <batch_tech_info>Generic xml generation of workunits</batch_tech_info>
+        <batch_proj>TESTING</batch_proj>
+        <batch_owner></batch_owner>
+        <batch_umid_start>a000</batch_umid_start>
+        <batch_umid_end>a008</batch_umid_end>
+        <batch_first_start_year>2013</batch_first_start_year>
+        <batch_last_start_year>2013</batch_last_start_year>
+</WorkGen>
