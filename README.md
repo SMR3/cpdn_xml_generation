@@ -29,8 +29,11 @@ It has the following command line options:
 IMPORTANT
 
 Remember to edit the header information so that:
+
 (a) The correct model and region are run
+
 (b) The results are sent to the correct upload server
+
 (c) The batch description is correct and a batch owner is added (for syntax see the project wiki)
 
 
