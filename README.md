@@ -3,8 +3,10 @@ Code to generate xml files for workunit submission to the climateprediction.net 
 
 
 This repository contains basic code for generating an attribution style weather@home experiment and hadcm3s perturbed parameter experiments.
+This is aimed to give you a starting point for generation scripts that can then be tailored to fit your requirements
 
 There are two main scripts:
+
 (1) create_basic_attribution.py
 
 This code will create two xmls for actual and natural weather@home simulations
@@ -24,10 +26,12 @@ It has the following command line options:
 --paramids= This should be either a comma separated list of parameter sets OR filename to read parameter sets from default will be all parameter sets in the data structure
 
 
+IMPORTANT
+
 Remember to edit the header information so that:
 (a) The correct model and region are run
 (b) The results are sent to the correct upload server
-(c) The batch description is correct
+(c) The batch description is correct and a batch owner is added (for syntax see the project wiki)
 
 
 
