@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <WorkGen>
-        <!--Database to use-->
-        <dbexpt>cpdnexpt</dbexpt>
         <!--App configuration setting wah1, wah2 and region along with dyn/triffid templates-->
         <app_config>config_dir/config_wah2_sas50.xml</app_config>
         <!--Upload information-->

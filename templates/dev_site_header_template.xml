@@ -1,11 +1,5 @@
 <?xml version="1.0" ?>
 <WorkGen>
-	<!--Connection to main database for ancillary file information-->
-        <ancil_db_name>cpdnexpt</ancil_db_name>
-        <ancil_db_user>anciluser</ancil_db_user>
-        <ancil_db_host>sirius.oerc.ox.ac.uk</ancil_db_host>
-        <!--Database to use-->
-        <dbexpt>cpdnexpt_dev</dbexpt>
         <!--App configuration setting wah1, wah2 and region along with dyn/triffid templates-->
         <app_config>config_dir/config_wah2.2_eas50.xml</app_config>
         <!--Upload information-->
