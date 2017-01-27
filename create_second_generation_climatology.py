@@ -5,13 +5,16 @@
 # Purpose : create the xml template for the HadAM3P experiment
 
 import xml.dom.minidom as dom
+from xml.dom.minidom import getDOMImplementation
 from StringIO import StringIO
 from ANC import *
 import random
 import getopt,sys
+import lxml.etree
 random.seed(1)  # ensure reproducibility!
 
 from create_xml2_funcs import CreatePertExpts,AddBatchDict,remove_whitespace_nodes
+from create_header_funcs import *
 
 class Vars:
         #input command line variables
@@ -59,17 +62,26 @@ if __name__ == "__main__":
 	# Forcing Parameters for simulations
 	params={}
 	params['model_start_month']=12
-	params['run_years']=1
-	params['run_months']=1
+	params['run_years']=0
+	params['run_months']=10
 	params['file_solar']='solar_1985_2020'
 	params['file_volcanic']='volc_1985_2020'
 	params['file_sulphox']='oxi.addfa'
 	params['file_ghg']='ghg_defaults'
-	params['restart_upload_month']=12
+	params['restart_upload_month']=4
 
 	# Set up doc
-	template='templates/wu_template_eas50_main.xml'
-	xml_doc = dom.parse(template)
+        upload_loc="upload3"
+        app_config="config_wah2.2_eas50.xml"
+        # define stash files in the order global,regional (or global only)
+        stash_files=["global_lotus_stash_2016-12-04.stashc","regional_lotus_stash_2016-12-04.stashc"]
+
+        impl = getDOMImplementation()
+
+        xml_doc = impl.createDocument(None, "WorkGen", None)
+        root = xml_doc.documentElement
+
+        make_header(xml_doc,Vars.site,upload_loc,app_config,stash_files)
 
 	# Set up number of perturbations 
 	pert_start=0
@@ -130,7 +142,13 @@ if __name__ == "__main__":
                           start_umid + '_' + end_umid + '.xml'
         fh = open("xmls/"+xml_out, 'w')
         print 'Writing to:',xml_out,'...'
-        #remove_whitespace_nodes(xml_doc)
-        xml_doc.writexml(fh)#,newl='\n',addindent='\t')
+        remove_whitespace_nodes(xml_doc)
+        xml_doc.writexml(fh,newl='\n',addindent='\t')
         fh.close()
-        print 'Done!'
+       
+	# Print out the number of xmls
+        doc = lxml.etree.parse("xmls/"+xml_out)
+        count = doc.xpath('count(//experiment)')
+        print "Number of workunits: ",int(count) 
+	
+	print 'Done!'
