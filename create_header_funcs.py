@@ -20,7 +20,7 @@ class SiteInfo:
 
 def get_upload_info(upload_loc,vn="2.2"):
 	# Dictionary of upload file handlers
-	upload_info_dict={"dev":("http://vorvadoss.oerc.ox.ac.uk/cpdnboinc_dev_cgi/file_upload_handler"),\
+	upload_info_dict={"dev":("dev","http://vorvadoss.oerc.ox.ac.uk/cpdnboinc_dev_cgi/file_upload_handler"),\
          	"upload2":("oxford","http://upload2.cpdn.org/cgi-bin/file_upload_handler"),\
                 "upload3":("badc","http://upload3.cpdn.org/cgi-bin/file_upload_handler"),\
                 "upload4":("anz","http://upload4.cpdn.org/cpdn_cgi/file_upload_handler"),\
