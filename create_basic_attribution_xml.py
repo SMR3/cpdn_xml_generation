@@ -12,7 +12,6 @@ from StringIO import StringIO
 from ANC import *
 import random
 import getopt,sys
-import lxml.etree
 random.seed(1)	# ensure reproducibility!
 
 from create_xml2_funcs import CreatePertExpts,AddBatchDict,remove_whitespace_nodes
@@ -84,9 +83,9 @@ def make_experiment_xml(prefix,xml_doc,params,restarts,ic_start,ic_end,start_umi
 #xml_doc.writexml(fh)
         fh.close()
 	
-	doc = lxml.etree.parse(xml_filename)
-	count = doc.xpath('count(//experiment)')
-	print "Number of workunits: ",int(count)
+	count = xml_doc.getElementsByTagName("experiment").length
+
+	print "Number of workunits: ",count
 
 	
 ##############################
