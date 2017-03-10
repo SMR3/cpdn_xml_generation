@@ -10,7 +10,6 @@ from StringIO import StringIO
 from ANC import *
 import random
 import getopt,sys
-import lxml.etree
 random.seed(1)  # ensure reproducibility!
 
 from create_xml2_funcs import CreatePertExpts,AddBatchDict,remove_whitespace_nodes
@@ -147,8 +146,7 @@ if __name__ == "__main__":
         fh.close()
        
 	# Print out the number of xmls
-        doc = lxml.etree.parse("xmls/"+xml_out)
-        count = doc.xpath('count(//experiment)')
-        print "Number of workunits: ",int(count) 
+        count = xml_doc.getElementsByTagName("experiment").length 
+        print "Number of workunits: ",count
 	
 	print 'Done!'
