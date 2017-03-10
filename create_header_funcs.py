@@ -106,7 +106,7 @@ def make_header(xml_doc,site,upload_loc,app_config,stash_files,vn="2.2"):
 	namelist_dir=get_namelist_dir(app_config)
 	node=xml_doc.createElement('namelist_dir')
         root.appendChild(node)
-	node.appendChild(xml_doc.createTextNode('namelist_dir/'+namelist_dir))
+	node.appendChild(xml_doc.createTextNode('namelist_template_files/'+namelist_dir))
 
 	# Add stash files
 	root.appendChild(xml_doc.createComment("Stash to use in the simulations"))
