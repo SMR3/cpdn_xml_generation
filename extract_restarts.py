@@ -7,11 +7,8 @@
 import sys,os,getopt,glob
 import numpy as np
 import zipfile
+from checkdate_ancil_dump import checkdate
 
-# Define the data directory
-gws='/group_workspaces/jasmin/cssp_china/'
-ddir=gws+'wp1/lotus/cpdn/lotus/'
-odir=gws+'users/ssparrow01/'
 
 model_types=["global","coupled","nested"]
 
@@ -20,8 +17,8 @@ prefixes=['atmos','region','ocean']
 class Vars:
         #input command line variables
         batch=0
-        data_dir=gws+'wp1/lotus/cpdn/lotus/'
-        out_dir=gws+'users/ssparrow01/actual_restarts/'
+        data_dir='/group_workspaces/jasmin/cssp_china/wp1/lotus/cpdn/lotus/'
+        out_dir='/group_workspaces/jasmin/cssp_china/users/ssparrow01/actual_restarts/'
         model_type='nested'
 	dry_run=False
         pass
@@ -117,25 +114,28 @@ def extract_restarts():
 
 	line=[]
 	for pid in prefix_ids:
-		old_file=prefixes[pid]+"_restart.day"
-		new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+file_id
-    		if Vars.dry_run:
-			print Vars.out_dir
-			print old_file,new_file
-		else:
-			if os.path.isfile(Vars.out_dir+new_file) or os.path.isfile(Vars.out_dir+new_file+'.gz'):
-				print "Already extracted"
-			else:
-				try:
-					os.rename(Vars.out_dir+old_file,Vars.out_dir+new_file)
-				except:
-					if os.path.exists(Vars.out_dir+old_file):
-    						os.remove(Vars.out_dir+old_file)
-					pass
-		# Create the line for the csv file information
-		line.append(new_file)
-	restart_lines.append(','.join(line))
-    
+                old_file=prefixes[pid]+"_restart.day"
+                new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+file_id
+                if not checkdate(Vars.out_dir+old_file):
+                        print 'Error', new_file
+                else:
+                        if Vars.dry_run:
+                                print Vars.out_dir
+                                print old_file,new_file
+                        else:
+                                if os.path.isfile(Vars.out_dir+new_file) or os.path.isfile(Vars.out_dir+new_file+'.gz'):
+                                        print "Already extracted"
+                                else:
+                                        try:
+                                                os.rename(Vars.out_dir+old_file,Vars.out_dir+new_file)
+                                        except:
+                                                if os.path.exists(Vars.out_dir+old_file):
+                                                        os.remove(Vars.out_dir+old_file)
+                                                pass
+                        # Create the line for the csv file information
+                        line.append(new_file)
+        restart_lines.append(','.join(line))
+	
     # write out the csv file
     if Vars.dry_run:
 	print restart_lines
