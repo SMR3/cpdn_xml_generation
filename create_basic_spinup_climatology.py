@@ -5,6 +5,7 @@
 # Purpose : create the xml template for the HadAM3P experiment
 
 import xml.dom.minidom as dom
+from xml.dom.minidom import getDOMImplementation
 from StringIO import StringIO
 from ANC import *
 import random
@@ -12,10 +13,53 @@ import getopt,sys
 random.seed(1)  # ensure reproducibility!
 
 from create_xml2_funcs import CreatePertExpts2,AddBatchDict,remove_whitespace_nodes
+from create_header_funcs import *
+
+class Vars:
+        #input command line variables
+        generic=False
+        site=""
+        pass
+
+
+##############################################################################
+
+
+def Usage():
+        print "Usage :  --generic       uses generic restart files\n"\
+        "       --site=         specify 'dev' or 'main' site"
+
+        sys.exit()
+
+
+##############################################################################
+
+
+def ProcessCommandLineOpts():
+
+        # Process the command line arguments
+        try:
+                opts, args = getopt.getopt(sys.argv[1:],'',
+                ['generic','site='])
+
+                if len(opts) == 0:
+                        Usage()
+                for opt, val in opts:
+                        if opt == '--generic':
+                                Vars.generic=True
+                        elif opt == '--site':
+                                Vars.site=val
+        except getopt.GetoptError:
+                Usage()
+
+##############################################################################
+
 
 	
 ##############################
 if __name__ == "__main__":
+	# Firstly read any command line options
+	ProcessCommandLineOpts()
 
 	# Parameters that are the same for historical and natural simulations
 	params={}
@@ -31,10 +75,22 @@ if __name__ == "__main__":
 	params['restart_upload_month']=12
 	
 
-	# Set up doc
-	template='templates/wu_template_eas50_main.xml'
-	xml_doc = dom.parse(template)
+	# Set up the xml doc - Remember to check/alter the header info as required
+        impl = getDOMImplementation()
+        # Set up doc
+        upload_loc="dev"
+        app_config="config_wah2.2_eas50.xml"
 
+        # define stash files in the order global,regional (or global only)
+        stash_files=["xaakm_global_basic_2016-04-18.stashc","xacxf_region_basic_2016-07-19_v5.stashc"]
+
+
+	# Set up doc
+	xml_doc = impl.createDocument(None, "WorkGen", None)
+        root = xml_doc.documentElement
+
+        make_header(xml_doc,Vars.site,upload_loc,app_config,stash_files)
+	
 	# Set up number of perturbations 
 	pert_start=0
 	pert_end = 55
@@ -81,16 +137,17 @@ if __name__ == "__main__":
 	
 	######## Write out the file ########
 	
-	xml_out='wu_wah2_eas50_spinup_climatology_1985-2013_' + str(params['model_start_year']) + "_" +\
+	xml_out='wu_wah2_eas50_basic_spinup_climatology_1985-2013_' + str(params['model_start_year']) + "_" +\
 			  start_umid + '_' + end_umid + '.xml'
 	fh = open("xmls/"+xml_out, 'w')
 	print 'Writing to:',xml_out,'...'
         remove_whitespace_nodes(xml_doc)
         xml_doc.writexml(fh,newl='\n',addindent='\t')
-#xml_doc.writexml(fh)
         fh.close()
 	
-#	#remove_whitespace_nodes(xml_doc)
-#	xml_doc.writexml(fh)#,newl='\n',addindent='\t')
-#	fh.close()
+        count = xml_doc.getElementsByTagName("experiment").length
+
+	print "Number of workunits: ",count
+
+
 	print 'Done!'
