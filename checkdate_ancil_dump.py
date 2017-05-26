@@ -20,7 +20,8 @@ import glob
 #
 def checkdate(infile):
 	# read the file as a binary file
-	fh = gzip.open(infile, 'rb')
+	#fh = gzip.open(infile, 'rb')
+	fh = open(infile, 'rb')
 	fix_hdr = read_fixed_header(fh)
 	pp_hdrs = read_pp_headers(fh, fix_hdr)
 	# check date in fix_hdr
