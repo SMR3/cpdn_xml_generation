@@ -78,7 +78,6 @@ def extract_restarts():
 	
     for restart_zip in restart_zips:
 	rzip=zipfile.ZipFile(restart_zip,'r')
-	
 	file_name=restart_zip.split('/')[-1]
 	if Vars.model_type=='nested':
 		file_id_split=file_name.split('_')[1:4]
@@ -99,11 +98,7 @@ def extract_restarts():
 	line=[]
 	for pid in prefix_ids:
                 old_file=prefixes[pid]+"_restart.day"
-    		if Vars.dry_run:
-			okay=True
-			rdate="dry_run"
-		else:
-    			(okay,rdate)=checkdate(Vars.out_dir+old_file)
+    		(okay,rdate)=checkdate(Vars.out_dir+old_file)
 		file_id_split[2]=rdate
 		file_id="_".join(file_id_split)
 		new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+file_id
@@ -114,6 +109,7 @@ def extract_restarts():
                                 print Vars.out_dir
                                 print old_file,new_file
                         else:
+				print old_file,new_file
                                 if os.path.isfile(Vars.out_dir+new_file) or os.path.isfile(Vars.out_dir+new_file+'.gz'):
                                         print "Already extracted"
                                 else:
