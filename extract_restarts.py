@@ -99,7 +99,11 @@ def extract_restarts():
 	line=[]
 	for pid in prefix_ids:
                 old_file=prefixes[pid]+"_restart.day"
-                (okay,rdate)=checkdate(Vars.out_dir+old_file)
+    		if Vars.dry_run:
+			okay=True
+			rdate="dry_run"
+		else:
+    			(okay,rdate)=checkdate(Vars.out_dir+old_file)
 		new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+rdate
 		if not (okay):
                         print 'Error', new_file
