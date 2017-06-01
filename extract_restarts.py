@@ -104,7 +104,9 @@ def extract_restarts():
 			rdate="dry_run"
 		else:
     			(okay,rdate)=checkdate(Vars.out_dir+old_file)
-		new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+rdate
+		file_id_split[2]=rdate
+		file_id="_".join(file_id_split)
+		new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+file_id
 		if not (okay):
                         print 'Error', new_file
                 else:
