@@ -69,14 +69,6 @@ def ProcessCommandLineOpts():
                 Usage()
 
 ##############################################################################
-def get_date(dstring):
-	start_year=int(dstring[:4])
-        start_mon=int(dstring[4:])
-        syr=str(start_year+1)
-        smon=str(start_mon)
-        sdate=syr+'-'+smon+'-01'
-        return sdate
-
 def extract_restarts():
     path=Vars.data_dir+'batch_'+Vars.batch+'/successful/*/*_restart.zip'
     print path
@@ -91,21 +83,13 @@ def extract_restarts():
 	if Vars.model_type=='nested':
 		file_id_split=file_name.split('_')[1:4]
 		region=file_name.split('_')[2]
-		sdate=get_date(file_id_split[2])
-		file_id_split[2]=sdate
 		prefix_ids=[0,1]
 	if Vars.model_type=='global':
 		file_id_split=file_name.split('_')[1:4]
-		sdate=get_date(file_id_split[2])
-		file_id_split[2]=sdate
 		prefix_ids=[0]
 	if Vars.model_type=='coupled':
 		file_id_split=file_name.split('_')[1:3]
-		sdate=get_date(file_id_split[2])
-                file_id_split[2]=sdate
 		prefix_ids=[0,2]
-
-        file_id='_'.join(file_id_split)
 
 	try:
 		rzip.extractall(Vars.out_dir)
@@ -115,8 +99,9 @@ def extract_restarts():
 	line=[]
 	for pid in prefix_ids:
                 old_file=prefixes[pid]+"_restart.day"
-                new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+file_id
-                if not checkdate(Vars.out_dir+old_file):
+                (okay,rdate)=checkdate(Vars.out_dir+old_file)
+		new_file=prefixes[pid]+'_restart_batch_'+Vars.batch+'_'+rdate
+		if not (okay):
                         print 'Error', new_file
                 else:
                         if Vars.dry_run:

@@ -6,7 +6,7 @@
 #  Date    : 07/01/14
 #  Purpose : Function to  check that dump files are for the first of the month
 #  Requires : read_um.py sourced from https://github.com/nrmassey/cpdn_ancil_maker
-#
+#	      01/06/16 SNS amended to return restart date
 #############################################################################
 
 import sys, os, gzip
@@ -29,12 +29,12 @@ def checkdate(infile):
 	mon = fix_hdr[28]
 	day = fix_hdr[29]
 #	print 'date of ancil/dump file'
-#	print year,mon,day
+	restart_date=str(year).zfill(4)+"-"+str(mon).zfill(2)+"-"+str(day).zfill(2)
 	fh.close()	
 	if day==1:
-		return True
+		return (True,restart_date)
 	else: 
-		return False
+		return (False,restart_date)
 
 #############################################################################
 
