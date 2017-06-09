@@ -1,15 +1,15 @@
 <?xml version="1.0" ?>
 <WorkGen>
         <!--App configuration setting wah1, wah2 and region along with dyn/triffid templates-->
-        <app_config>config_dir/config_wah2_sas50.xml</app_config>
+        <app_config>config_dir/config_wah2.2_sas50.xml</app_config>
         <!--Upload information-->
         <upload_handler>http://upload2.cpdn.org/cgi-bin/file_upload_handler</upload_handler>
-        <result_template_prefix>upload_templates/oxford/result_template_upload2</result_template_prefix>
+        <result_template_prefix>upload_templates/oxford2.2/result_template_upload2</result_template_prefix>
         <!--Download information for participants to get workunits-->
         <download_url_base>http://download.cpdn.org/download/</download_url_base>
         <download_dir_base>/storage/download/</download_dir_base>
         <project_dir>/var/www/boinc/projects/cpdnboinc</project_dir>
-        <namelist_dir>namelist_template_files/wah2</namelist_dir>
+        <namelist_dir>namelist_template_files/wah2.2</namelist_dir>
         <!--Stash to use in the simulations-->
         <global_stashc>xadae.sulph.stashc.global_jul16</global_stashc>
         <region_stashc>xacxf.sulph.stashc.region_jul16</region_stashc>
