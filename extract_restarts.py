@@ -92,6 +92,9 @@ def extract_restarts():
 
 	try:
 		rzip.extractall(Vars.out_dir)
+	except  zipfile.BadZipfile, err:
+		print "Bad zip file ",err
+		continue
         except:
 		pass
 
