@@ -7,6 +7,7 @@
 import sys,os,getopt,glob
 import numpy as np
 import zipfile
+import zlib
 from checkdate_ancil_dump import checkdate
 
 
@@ -91,9 +92,13 @@ def extract_restarts():
 		prefix_ids=[0,2]
 
 	try:
+        # check to see if it's a valid zip or invalid compressed data to inflate
 		rzip.extractall(Vars.out_dir)
 	except  zipfile.BadZipfile, err:
 		print "Bad zip file ",err
+		continue
+	except zlib.error,err:
+		print "invalid compressed data to inflace",err
 		continue
         except:
 		pass
