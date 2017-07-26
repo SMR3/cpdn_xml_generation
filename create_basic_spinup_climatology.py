@@ -17,7 +17,6 @@ from create_header_funcs import *
 
 class Vars:
         #input command line variables
-        generic=False
         site=""
         pass
 
@@ -26,9 +25,7 @@ class Vars:
 
 
 def Usage():
-        print "Usage :  --generic       uses generic restart files\n"\
-        "       --site=         specify 'dev' or 'main' site"
-
+        print "Usage :  --site=         specify 'dev' or 'main' site"
         sys.exit()
 
 
@@ -40,14 +37,12 @@ def ProcessCommandLineOpts():
         # Process the command line arguments
         try:
                 opts, args = getopt.getopt(sys.argv[1:],'',
-                ['generic','site='])
+                ['site='])
 
                 if len(opts) == 0:
                         Usage()
                 for opt, val in opts:
-                        if opt == '--generic':
-                                Vars.generic=True
-                        elif opt == '--site':
+                        if opt == '--site':
                                 Vars.site=val
         except getopt.GetoptError:
                 Usage()
