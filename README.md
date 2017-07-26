@@ -58,7 +58,7 @@ Remember to edit **all** scripts to specify:
 (c) The batch description is correct and a batch owner is added (for syntax see the project wiki)
 
 
-Restart file extraction:
+**Restart file extraction:**
 
 Restart files from spinup simulations can be extracted using extract_restarts.py.
 This code has the following command line options:
