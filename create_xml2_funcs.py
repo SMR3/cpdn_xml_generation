@@ -182,9 +182,10 @@ def CreatePertExpts(xml_doc,params_dict,restarts,pert_start,pert_end,anc):
 	# restart dumps:
 	tmp=restarts.split(',')
 	fatmos=tmp[0].strip()
-	fregion=tmp[1].strip()
 	params_dict['file_atmos']=fatmos
-	params_dict['file_region']=fregion
+	if len(tmp)>1:
+		fregion=tmp[1].strip()
+		params_dict['file_region']=fregion
 	pert_list = GenPertList()[pert_start:pert_end] 
 	
 	for i,pert in enumerate(pert_list):

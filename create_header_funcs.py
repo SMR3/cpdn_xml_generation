@@ -111,7 +111,7 @@ def make_header(xml_doc,site,upload_loc,app_config,stash_files,vn="2.2"):
 	# Add stash files
 	root.appendChild(xml_doc.createComment("Stash to use in the simulations"))
         stash_tags=["global_stashc","region_stashc"]
-	for i,stash_tag in enumerate (stash_tags):
+	for i,stash_tag in enumerate (stash_tags[0:len(stash_files)]):
 		node=xml_doc.createElement(stash_tag)
         	root.appendChild(node)
 		node.appendChild(xml_doc.createTextNode(stash_files[i]))
