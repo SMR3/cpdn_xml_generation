@@ -67,6 +67,10 @@ if __name__ == "__main__":
 	# Set up doc
         upload_loc="upload3"
         app_config="config_wah2.2_eas50.xml"
+	s1=app_config.split(".")
+	s2=s1[-2].split("_")
+	region=s2[-1]
+	print region
         # define stash files in the order global,regional (or global only)
         stash_files=["global_lotus_stash_2016-12-04.stashc","regional_lotus_stash_2016-12-04.stashc"]
 
@@ -79,10 +83,10 @@ if __name__ == "__main__":
 
 	# Set up number of perturbations 
 	pert_start=0
-	if site=="main":
+	if Vars.site=="main":
 		pert_end = 6
 		nrestarts=40 # Take only 40 restarts per year
-	if site=="dev":
+	if Vars.site=="dev":
 		pert_end = 1 # Use 1 initial condition perturbation
 		nrestarts=1 # Take only 1 restart per year
 	
@@ -139,7 +143,7 @@ if __name__ == "__main__":
 	
 	######## Write out the file ########
 
-        xml_out='wu_wah2_'+region+'_gen2_climatology_'+site+str(first_year)+'-' + str(params['model_start_year']) + "_" +\
+        xml_out='wu_wah2_'+region+'_gen2_climatology_'+Vars.site+str(first_year)+'-' + str(params['model_start_year']) + "_" +\
                           start_umid + '_' + end_umid + '.xml'
         fh = open("xmls/"+xml_out, 'w')
         print 'Writing to:',xml_out,'...'
