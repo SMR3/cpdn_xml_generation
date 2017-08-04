@@ -79,8 +79,14 @@ if __name__ == "__main__":
 
 	# Set up number of perturbations 
 	pert_start=0
-	pert_end = 6
+	if site=="main":
+		pert_end = 6
+		nrestarts=40 # Take only 40 restarts per year
+	if site=="dev":
+		pert_end = 1 # Use 1 initial condition perturbation
+		nrestarts=1 # Take only 1 restart per year
 	
+
 	first_year=1986
 	last_year=2015
 
@@ -90,6 +96,7 @@ if __name__ == "__main__":
 	anc = ANC()
 	anc.Start(start_umid) # next set
 
+        # Define the restart csv file to use
 	restarts_list='batch_lists/batch_486_restarts.csv'
 
 	print "Creating experiments... "
@@ -101,7 +108,7 @@ if __name__ == "__main__":
 	for year in range(first_year,last_year+1):
         	i=0
                 for restarts in open(restarts_list):
-                        if i>=40: # Take only 40 restarts per year
+                        if i>=nrestarts: # Take only nrestarts per year
                                 break
                         if restarts.split(',')[0].find('_'+str(year)+'-')==-1:
                                 continue # The restart isn't for this year. 
@@ -132,7 +139,7 @@ if __name__ == "__main__":
 	
 	######## Write out the file ########
 
-        xml_out='wu_wah2_eas50_gen2_climatology_main'+str(first_year)+'-' + str(params['model_start_year']) + "_" +\
+        xml_out='wu_wah2_'+region+'_gen2_climatology_'+site+str(first_year)+'-' + str(params['model_start_year']) + "_" +\
                           start_umid + '_' + end_umid + '.xml'
         fh = open("xmls/"+xml_out, 'w')
         print 'Writing to:',xml_out,'...'
