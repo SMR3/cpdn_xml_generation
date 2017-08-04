@@ -66,12 +66,10 @@ if __name__ == "__main__":
 
 	# Set up doc
         upload_loc="upload3"
-        app_config="config_wah2.2_eas50.xml"
-	s1=app_config.split(".")
-	s2=s1[-2].split("_")
-	region=s2[-1]
-	print region
-        # define stash files in the order global,regional (or global only)
+	region="eas50"
+        app_config="config_wah2.2_"+region+".xml"
+        
+	# define stash files in the order global,regional (or global only)
         stash_files=["global_lotus_stash_2016-12-04.stashc","regional_lotus_stash_2016-12-04.stashc"]
 
         impl = getDOMImplementation()
