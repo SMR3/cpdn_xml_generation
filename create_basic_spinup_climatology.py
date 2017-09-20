@@ -4,6 +4,7 @@
 # Author  : Peter Uhe, modified from script by Neil Massey
 # Purpose : create the xml template for the HadAM3P experiment
 
+import os
 import xml.dom.minidom as dom
 from xml.dom.minidom import getDOMImplementation
 from StringIO import StringIO

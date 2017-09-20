@@ -6,6 +6,7 @@
 # Purpose : create the xml template for the weather@home experiment 
 #           This code will create a pair of historical and natural xmls
 
+import os
 import xml.dom.minidom as dom
 from xml.dom.minidom import getDOMImplementation
 from StringIO import StringIO
