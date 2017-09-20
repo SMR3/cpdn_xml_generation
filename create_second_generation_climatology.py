@@ -143,7 +143,9 @@ if __name__ == "__main__":
 
         xml_out='wu_wah2_'+region+'_gen2_climatology_'+Vars.site+str(first_year)+'-' + str(params['model_start_year']) + "_" +\
                           start_umid + '_' + end_umid + '.xml'
-        fh = open("xmls/"+xml_out, 'w')
+        if not os.path.exists('xmls'):
+	            os.makedirs('xmls')
+	fh = open("xmls/"+xml_out, 'w')
         print 'Writing to:',xml_out,'...'
         remove_whitespace_nodes(xml_doc)
         xml_doc.writexml(fh,newl='\n',addindent='\t')

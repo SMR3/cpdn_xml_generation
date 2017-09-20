@@ -144,6 +144,8 @@ if __name__ == "__main__":
         ic_end = 3
 
 	filename_prefix='xmls/wu_wah2_'+region+'_'
+	if not os.path.exists('xmls'):
+	    os.makedirs('xmls')
 
 	print "Creating experiments... "
 	for expt_type in expt_types:

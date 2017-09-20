@@ -128,7 +128,8 @@ def xmlgen():
   
   #Output XML filename
   outxmlfile='xmls/hadcm3s_basic_'+str(model_start_year)+'.xml'
-  
+  if not os.path.exists('xmls'):
+              os.makedirs('xmls')
 
   #Read the parameter lookup table 
   param_dataset = read_paramtable()

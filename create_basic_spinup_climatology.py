@@ -134,6 +134,8 @@ if __name__ == "__main__":
 	
 	xml_out='wu_wah2_eas50_basic_spinup_climatology_1985-2013_' + str(params['model_start_year']) + "_" +\
 			  start_umid + '_' + end_umid + '.xml'
+	if not os.path.exists('xmls'):
+		os.makedirs('xmls')
 	fh = open("xmls/"+xml_out, 'w')
 	print 'Writing to:',xml_out,'...'
         remove_whitespace_nodes(xml_doc)
