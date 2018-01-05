@@ -27,7 +27,9 @@ def get_upload_info(upload_loc,vn="2.2"):
                 "upload5":("oregon","http://upload5.cpdn.org/cpdn_cgi_main/file_upload_handler"),\
                 "upload6":("mexico","http://upload6.cpdn.org/cgi-bin/file_upload_handler"),\
                 "upload7":("korea","http://upload7.cpdn.org/cgi-bin/file_upload_handler"),\
-                "upload8":("india","http://upload8.cpdn.org/cgi-bin/file_upload_handler")}
+                "upload8":("india","http://upload8.cpdn.org/cgi-bin/file_upload_handler"),
+		"upload8":("bristol","http://upload9.cpdn.org/cgi-bin/file_upload_handler"),
+		"upload8":("kenya","http://upload10.cpdn.org/cgi-bin/file_upload_handler")}
 	
 	upload_handler=upload_info_dict[upload_loc][1]
 	upload_template="upload_templates/"+upload_info_dict[upload_loc][0]+vn+"/result_template_"+upload_loc
