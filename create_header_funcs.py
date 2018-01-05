@@ -23,10 +23,10 @@ def get_upload_info(upload_loc,vn="2.2"):
 	upload_info_dict={"dev":("dev","http://vorvadoss.oerc.ox.ac.uk/cpdnboinc_dev_cgi/file_upload_handler"),\
          	"upload2":("oxford","http://upload2.cpdn.org/cgi-bin/file_upload_handler"),\
                 "upload3":("badc","http://upload3.cpdn.org/cgi-bin/file_upload_handler"),\
-                "upload4":("anz","http://upload4.cpdn.org/cpdn_cgi/file_upload_handler"),\
+                "upload4":("anz","http://upload4.cpdn.org/cgi-bin/file_upload_handler"),\
                 "upload5":("oregon","http://upload5.cpdn.org/cpdn_cgi_main/file_upload_handler"),\
                 "upload6":("mexico","http://upload6.cpdn.org/cgi-bin/file_upload_handler"),\
-                "upload7":("korea","http://upload7.cpdn.org/cpdn_cgi/file_upload_handler"),\
+                "upload7":("korea","http://upload7.cpdn.org/cgi-bin/file_upload_handler"),\
                 "upload8":("india","http://upload8.cpdn.org/cgi-bin/file_upload_handler")}
 	
 	upload_handler=upload_info_dict[upload_loc][1]
